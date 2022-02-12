@@ -27,8 +27,8 @@ import kotlin.concurrent.scheduleAtFixedRate
 class MainActivity : AppCompatActivity() {
     var TAG = "MainActivity"
 
-    // TODO 1: define your model name
-    //var modelPath = "my_birds_model.tflite"
+    // path for our model
+    var modelPath = "genre_classifier_model.tflite"
 
     var probabilityThreshold: Float = 0.3f
 
@@ -61,18 +61,18 @@ class MainActivity : AppCompatActivity() {
             val numberOfSamples = tensor.load(record)
             val output = classifier.classify(tensor)
 
-            // TODO 2: Check if it's a bird sound.
-            //var filteredModelOutput = output[0].categories.filter {
-            //    it.label.contains("Bird") && it.score > probabilityThreshold
-            //}
+             // Check if music is playing
+            var filteredModelOutput = output[0].categories.filter {
+                it.label.contains("Music") && it.score > probabilityThreshold
+            }
 
-            // TODO 3: given there's a bird sound, which one is it?
-            //if (filteredModelOutput.isNotEmpty()) {
-            //    Log.i("Yamnet", "bird sound detected!")
-            //    filteredModelOutput = output[1].categories.filter {
-            //        it.score > probabilityThreshold
-            //    }
-            //}
+            // Given there's music, what genre is it?
+            if (filteredModelOutput.isNotEmpty()) {
+                Log.i("Yamnet", "Song detected!")
+                filteredModelOutput = output[1].categories.filter {
+                    it.score > probabilityThreshold
+                }
+            }
 
             val outputStr =
                 filteredModelOutput.sortedBy { -it.score }
