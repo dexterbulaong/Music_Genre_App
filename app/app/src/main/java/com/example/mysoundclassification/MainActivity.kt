@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
         val record = classifier.createAudioRecord()
         record.startRecording()
 
-        Timer().scheduleAtFixedRate(1, 500) {
+        Timer().scheduleAtFixedRate(1, 1000) {
 
             val numberOfSamples = tensor.load(record)
             val output = classifier.classify(tensor)
