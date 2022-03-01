@@ -14,10 +14,7 @@
 
 package com.example.mysoundclassification
 
-import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
 
@@ -27,12 +24,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val analyzeButton: Button = findViewById(R.id.button_analyze)
-        analyzeButton.setOnClickListener {
-            // Do something in response to button click
-            val intent = Intent(this, AnalyzeActivity::class.java)
-            startActivity(intent)
-        }
+
     }
 
 }
