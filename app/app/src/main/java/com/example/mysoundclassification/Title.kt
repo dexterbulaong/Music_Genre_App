@@ -12,13 +12,13 @@ class Title : AppCompatActivity() {
 
         val toGenre = findViewById<Button>(R.id.button1)
         toGenre.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, HoldDown::class.java)
             startActivity(intent)
         }
 
         val toReal = findViewById<Button>(R.id.button2)
         toReal.setOnClickListener {
-            val intent = Intent(this, HoldDown::class.java)
+            val intent = Intent(this, AnalyzeActivity::class.java)
             startActivity(intent)
         }
     }
