@@ -1,13 +1,14 @@
 package com.example.mysoundclassification
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View.OnTouchListener
 import android.widget.ImageButton
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import org.tensorflow.lite.task.audio.classifier.AudioClassifier
 import java.util.*
 import kotlin.concurrent.scheduleAtFixedRate
@@ -23,6 +24,7 @@ class HoldDown : AppCompatActivity(){
     lateinit var textView: TextView
 
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hold_down)
@@ -35,7 +37,7 @@ class HoldDown : AppCompatActivity(){
         val tensor = classifier.createInputTensorAudio()
         val format = classifier.requiredTensorAudioFormat
         val record = classifier.createAudioRecord()
-        lateinit var s: String
+        var s = ""
 
         val listGenre = mutableListOf<String>()
         val listProb = mutableListOf<Float>()
