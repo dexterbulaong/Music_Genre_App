@@ -32,16 +32,16 @@ class AnalyzeActivity : AppCompatActivity(){
         requestPermissions(arrayOf(Manifest.permission.RECORD_AUDIO), REQUEST_RECORD_AUDIO)
 
         textView = findViewById<TextView>(R.id.output)
-        val recorderSpecsTextView = findViewById<TextView>(R.id.textViewAudioRecorderSpecs)
+//        val recorderSpecsTextView = findViewById<TextView>(R.id.textViewAudioRecorderSpecs)
 
         val classifier = AudioClassifier.createFromFile(this, modelPath)
 
         val tensor = classifier.createInputTensorAudio()
 
         val format = classifier.requiredTensorAudioFormat
-        val recorderSpecs = "Number Of Channels: ${format.channels}\n" +
-                "Sample Rate: ${format.sampleRate}"
-        recorderSpecsTextView.text = recorderSpecs
+//        val recorderSpecs = "Number Of Channels: ${format.channels}\n" +
+//                "Sample Rate: ${format.sampleRate}"
+//        recorderSpecsTextView.text = recorderSpecs
 
         val record = classifier.createAudioRecord()
         record.startRecording()
