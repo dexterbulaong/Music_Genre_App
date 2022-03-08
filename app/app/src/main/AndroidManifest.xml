@@ -13,7 +13,8 @@
         android:theme="@style/Theme.MySoundClassification">
         <activity
             android:name=".HoldDown"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity android:name=".Title">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,7 +22,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"></activity>
         <activity android:name=".AnalyzeActivity"></activity>
     </application>
 

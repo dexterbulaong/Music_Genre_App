@@ -22,6 +22,7 @@ class HoldDown : AppCompatActivity(){
     var probabilityThreshold: Float = 0.3f
 
     lateinit var textView: TextView
+    lateinit var textAnswer: TextView
 
 
     @SuppressLint("ClickableViewAccessibility")
@@ -31,6 +32,8 @@ class HoldDown : AppCompatActivity(){
         // Declare a button
         val mBtn = findViewById<ImageButton>(R.id.holdButton)
         textView = findViewById<TextView>(R.id.holdText)
+        textAnswer = findViewById<TextView>(R.id.textAnswer)
+        var textAgain = findViewById<TextView>(R.id.tryAgain)
 
 
         val classifier = AudioClassifier.createFromFile(this, modelPath)
@@ -102,7 +105,9 @@ class HoldDown : AppCompatActivity(){
                     val maxOccurringGenre = listGenre.groupBy { it }.mapValues { it.value.size }.maxBy { it.value }?.key
 
                     if (s.isNotEmpty())
-                        textView.text = maxOccurringGenre
+                        textView.text = "This song's genre is"
+                        textAnswer.text = maxOccurringGenre
+                        textAgain.text = "Hold Down Button Again to Restart"
                 }
             }
             false

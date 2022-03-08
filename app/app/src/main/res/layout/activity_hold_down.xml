@@ -11,7 +11,7 @@
         android:id="@+id/holdButton"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginBottom="128dp"
+        android:layout_marginBottom="92dp"
         android:background="@color/blue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,15 +21,43 @@
 
     <TextView
         android:id="@+id/holdText"
-        android:layout_width="198dp"
-        android:layout_height="66dp"
+        android:layout_width="289dp"
+        android:layout_height="121dp"
         android:layout_marginTop="132dp"
         android:text="Hold Button to Check Music"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="24sp"
+        android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textAnswer"
+        android:layout_width="198dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="220dp"
+        android:text=""
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tryAgain"
+        android:layout_width="289dp"
+        android:layout_height="29dp"
+        android:layout_marginTop="96dp"
+        android:text=""
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textAnswer" />
 </androidx.constraintlayout.widget.ConstraintLayout>
