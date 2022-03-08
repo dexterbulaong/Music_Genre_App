@@ -1,14 +1,27 @@
 package com.example.mysoundclassification
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+
 
 class Title : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_title)
+
+        val MyVersion = Build.VERSION.SDK_INT
+        if (MyVersion > Build.VERSION_CODES.LOLLIPOP_MR1) {
+            if (!checkIfAlreadyhavePermission()) {
+                requestForSpecificPermission()
+            }
+        }
 
         val toGenre = findViewById<Button>(R.id.button1)
         toGenre.setOnClickListener {
@@ -21,5 +34,26 @@ class Title : AppCompatActivity() {
             val intent = Intent(this, AnalyzeActivity::class.java)
             startActivity(intent)
         }
+
+
+    }
+
+    private fun checkIfAlreadyhavePermission(): Boolean {
+        val result = ContextCompat.checkSelfPermission(this, Manifest.permission.GET_ACCOUNTS)
+        return if (result == PackageManager.PERMISSION_GRANTED) {
+            true
+        } else {
+            false
+        }
+    }
+
+    private fun requestForSpecificPermission() {
+        ActivityCompat.requestPermissions(
+            this,
+            arrayOf(
+                Manifest.permission.RECORD_AUDIO
+            ),
+            101
+        )
     }
 }

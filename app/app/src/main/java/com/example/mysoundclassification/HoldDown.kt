@@ -7,7 +7,6 @@ import android.view.MotionEvent
 import android.view.View.OnTouchListener
 import android.widget.ImageButton
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import org.tensorflow.lite.task.audio.classifier.AudioClassifier
 import java.util.*
@@ -50,7 +49,9 @@ class HoldDown : AppCompatActivity(){
         mBtn.setOnTouchListener(OnTouchListener { v, event ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
-                    Toast.makeText(applicationContext, "Button Held", Toast.LENGTH_SHORT).show()
+                    listGenre.clear()
+                    listProb.clear()
+                    //Toast.makeText(applicationContext, "Button Held", Toast.LENGTH_SHORT).show()
 
                     record.startRecording()
 
@@ -98,16 +99,30 @@ class HoldDown : AppCompatActivity(){
 
                 }
                 MotionEvent.ACTION_UP -> {
-                    Toast.makeText(applicationContext, "Button Released", Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(applicationContext, "Button Released", Toast.LENGTH_SHORT).show()
 
                     record.stop()
 
                     val maxOccurringGenre = listGenre.groupBy { it }.mapValues { it.value.size }.maxBy { it.value }?.key
 
-                    if (s.isNotEmpty())
-                        textView.text = "This song's genre is"
-                        textAnswer.text = maxOccurringGenre
+                    if (s.isNotEmpty()) {
+                        if (maxOccurringGenre.isNullOrEmpty()) {
+                            textView.text = "Not Enough Data, Need More"
+                            textAnswer.text = ""
+                            textAgain.text = "Hold Down Button Again to Restart"
+                        } else {
+                            textView.text = "This song's genre is"
+                            textAnswer.text = maxOccurringGenre
+                            textAgain.text = "Hold Down Button Again to Restart"
+                        }
+                    }
+                    else{
+                        textView.text = "NO MUSIC DETECTED"
+                        textAnswer.text = ""
                         textAgain.text = "Hold Down Button Again to Restart"
+                    }
+
+
                 }
             }
             false
