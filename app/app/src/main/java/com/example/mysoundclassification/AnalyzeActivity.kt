@@ -1,11 +1,8 @@
 package com.example.mysoundclassification
 
 import android.Manifest
-import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.util.Log
-import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import org.tensorflow.lite.task.audio.classifier.AudioClassifier
@@ -32,6 +29,8 @@ class AnalyzeActivity : AppCompatActivity(){
         requestPermissions(arrayOf(Manifest.permission.RECORD_AUDIO), REQUEST_RECORD_AUDIO)
 
         textView = findViewById<TextView>(R.id.output)
+        var textViewSong = findViewById<TextView>(R.id.outputSong)
+        var textViewPerc = findViewById<TextView>(R.id.outputPerc)
 //        val recorderSpecsTextView = findViewById<TextView>(R.id.textViewAudioRecorderSpecs)
 
         val classifier = AudioClassifier.createFromFile(this, modelPath)
@@ -68,9 +67,19 @@ class AnalyzeActivity : AppCompatActivity(){
                 filteredModelOutput.sortedBy { -it.score }
                     .joinToString(separator = "\n") { "${it.label} -> ${it.score} " }
 
+//            val outputSong =
+//                filteredModelOutput.sortedBy { -it.score }
+//                    .joinToString(separator = "\n") { "${it.label}"}
+//
+//            val outputPerc =
+//                filteredModelOutput.sortedBy { -it.score }
+//                    .joinToString(separator = "\n") { "${it.score * 100}%" }
+
             if (outputStr.isNotEmpty())
                 runOnUiThread {
                     textView.text = outputStr
+//                    textViewPerc.text = outputPerc
+//                    textViewSong.text = outputSong
                 }
         }
     }

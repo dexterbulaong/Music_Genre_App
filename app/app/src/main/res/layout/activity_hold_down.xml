@@ -40,7 +40,6 @@
         android:layout_marginTop="220dp"
         android:fontFamily="serif-monospace"
         android:textAlignment="center"
-        android:text=" "
         android:textAllCaps="true"
         android:textColor="@color/white"
         android:textSize="36sp"
@@ -52,14 +51,15 @@
 
     <TextView
         android:id="@+id/tryAgain"
-        android:layout_width="289dp"
-        android:layout_height="29dp"
-        android:layout_marginTop="96dp"
-        android:text=""
+        android:layout_width="286dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="80dp"
+        android:text="Approximately 10 sec \n(longer for better results)"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textAnswer" />
 </androidx.constraintlayout.widget.ConstraintLayout>

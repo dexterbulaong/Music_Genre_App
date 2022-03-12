@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.mysoundclassification">
 
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
@@ -14,16 +15,22 @@
         android:theme="@style/Theme.MySoundClassification">
         <activity
             android:name=".HoldDown"
+            android:screenOrientation="portrait"
             android:exported="false"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Title">
+            tools:ignore="LockedOrientationActivity" />
+        <activity android:name=".Title"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AnalyzeActivity"></activity>
+        <activity
+            android:name=".AnalyzeActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
     </application>
 
 </manifest>
