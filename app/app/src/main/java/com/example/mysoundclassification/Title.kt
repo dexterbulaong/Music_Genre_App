@@ -40,11 +40,7 @@ class Title : AppCompatActivity() {
 
     private fun checkIfAlreadyhavePermission(): Boolean {
         val result = ContextCompat.checkSelfPermission(this, Manifest.permission.GET_ACCOUNTS)
-        return if (result == PackageManager.PERMISSION_GRANTED) {
-            true
-        } else {
-            false
-        }
+        return result == PackageManager.PERMISSION_GRANTED
     }
 
     private fun requestForSpecificPermission() {

@@ -40,25 +40,23 @@ class HoldDown : AppCompatActivity(){
         val format = classifier.requiredTensorAudioFormat
         val record = classifier.createAudioRecord()
         var s = ""
+        var timer = Timer()
 
         val listGenre = mutableListOf<String>()
         val listProb = mutableListOf<Float>()
-
 
         // button now recognizes being held and released instead of just activating via long press
         mBtn.setOnTouchListener(OnTouchListener { v, event ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
+                    //Toast.makeText(applicationContext, "Button Held", Toast.LENGTH_SHORT).show()
                     listGenre.clear()
                     listProb.clear()
-                    //Toast.makeText(applicationContext, "Button Held", Toast.LENGTH_SHORT).show()
-
-                    record.startRecording()
-
+                    timer = Timer()
                     ///////////////////////////////////////////////////////////////////////
 
-                    Timer().scheduleAtFixedRate(1, 1000) {
-
+                    timer.scheduleAtFixedRate(1, 1000) {
+                        record.startRecording()
                         val numberOfSamples = tensor.load(record)
                         val output = classifier.classify(tensor)
 
@@ -75,6 +73,7 @@ class HoldDown : AppCompatActivity(){
                             }
                         }
 
+                        output.clear()
 
                         val outputStr =
                             filteredModelOutput.sortedBy { -it.score }
@@ -88,11 +87,12 @@ class HoldDown : AppCompatActivity(){
                                 listGenre.add(label)
 
 //                                val score =
-//                                    filteredModelOutput.sortedBy { -it.score }[0].score.toString()
+//                                    filteredModelOutput.sortedBy { -it.score }[0].score
 //                                listProb.add(score)
 
                                 s = outputStr
                             }
+
                     }
 
                     //////////////////////////////////////////////////////////////////////
@@ -100,8 +100,8 @@ class HoldDown : AppCompatActivity(){
                 }
                 MotionEvent.ACTION_UP -> {
                     //Toast.makeText(applicationContext, "Button Released", Toast.LENGTH_SHORT).show()
-
                     record.stop()
+                    timer.cancel()
 
                     val maxOccurringGenre = listGenre.groupBy { it }.mapValues { it.value.size }.maxBy { it.value }?.key
 
@@ -121,7 +121,6 @@ class HoldDown : AppCompatActivity(){
                         textAnswer.text = ""
                         textAgain.text = "Hold Down Button Again to Restart"
                     }
-
 
                 }
             }
