@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat
 
 class Title : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        var modelPath = "genre_classifier_model.tflite"
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_title)
 

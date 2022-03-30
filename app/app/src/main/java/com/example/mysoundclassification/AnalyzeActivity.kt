@@ -9,6 +9,7 @@ import org.tensorflow.lite.task.audio.classifier.AudioClassifier
 import java.util.*
 import kotlin.concurrent.scheduleAtFixedRate
 
+
 class AnalyzeActivity : AppCompatActivity(){
 
     var TAG = "AnalyzeActivity"
@@ -20,10 +21,14 @@ class AnalyzeActivity : AppCompatActivity(){
 
     lateinit var textView: TextView
 
+    var timer = Timer()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_analyze)
+
+        timer = Timer()
 
         val REQUEST_RECORD_AUDIO = 1337
         requestPermissions(arrayOf(Manifest.permission.RECORD_AUDIO), REQUEST_RECORD_AUDIO)
@@ -45,7 +50,7 @@ class AnalyzeActivity : AppCompatActivity(){
         val record = classifier.createAudioRecord()
         record.startRecording()
 
-        Timer().scheduleAtFixedRate(1, 1000) {
+        timer.scheduleAtFixedRate(1, 1000) {
 
             val numberOfSamples = tensor.load(record)
             val output = classifier.classify(tensor)
@@ -82,6 +87,12 @@ class AnalyzeActivity : AppCompatActivity(){
 //                    textViewSong.text = outputSong
                 }
         }
+    }
+    override fun onBackPressed() {
+        super.onBackPressed()
+        timer.cancel()
+        //record.stop()
+        super.finish()
     }
 
 
