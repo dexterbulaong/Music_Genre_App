@@ -39,7 +39,7 @@ class HoldDown : AppCompatActivity(){
         val tensor = classifier.createInputTensorAudio()
         val format = classifier.requiredTensorAudioFormat
         val record = classifier.createAudioRecord()
-        var s = ""
+        var storedStr = ""
         var timer = Timer()
 
         val listGenre = mutableListOf<String>()
@@ -90,7 +90,7 @@ class HoldDown : AppCompatActivity(){
 //                                    filteredModelOutput.sortedBy { -it.score }[0].score
 //                                listProb.add(score)
 
-                                s = outputStr
+                                storedStr = outputStr
                             }
 
                     }
@@ -105,13 +105,13 @@ class HoldDown : AppCompatActivity(){
 
                     val maxOccurringGenre = listGenre.groupBy { it }.mapValues { it.value.size }.maxBy { it.value }?.key
 
-                    if (s.isNotEmpty()) {
+                    if (storedStr.isNotEmpty()) {
                         if (maxOccurringGenre.isNullOrEmpty()) {
                             textView.text = "Not Enough Data, Need More"
                             textAnswer.text = ""
                             textAgain.text = "Hold Down Button Again to Restart"
                         } else {
-                            textView.text = "This song's genre is"
+                            textView.text = "This songs genre is"
                             textAnswer.text = maxOccurringGenre
                             textAgain.text = "Hold Down Button Again to Restart"
                         }
@@ -128,6 +128,7 @@ class HoldDown : AppCompatActivity(){
         })
 
     }
+
 
 
 }
