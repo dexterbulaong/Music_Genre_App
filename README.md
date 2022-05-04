@@ -1,6 +1,6 @@
 # Music Genre Classifying Android App
 
-This project was migrated from gitlab. The purpose of this app was to learn the basics of Android development and Machine Learning. 
+This project was migrated from gitlab. The purpose of this app was to further explore Android development and Machine Learning. 
 
 
 ## Description
